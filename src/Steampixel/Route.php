@@ -4,7 +4,7 @@ namespace Steampixel;
 
 class Route {
 
-    private static $routes = array();
+    private static array $routes = array();
     private static $pathNotFound = null;
     private static $methodNotAllowed = null;
 
@@ -15,31 +15,31 @@ class Route {
      * @param string|array $method Either a string of allowed method or an array with string values
      *
      */
-    public static function add($expression, $function, $method = 'get') {
-        array_push(self::$routes, array(
+    public static function add(string $expression, callable $function, $method = 'get') {
+        self::$routes[] = array(
             'expression' => $expression,
             'function' => $function,
             'method' => $method
-        ));
+        );
     }
 
-    public static function getAll() {
+    public static function getAll(): array {
         return self::$routes;
     }
 
-    public static function pathNotFound($function) {
+    public static function pathNotFound(callable $function) {
         self::$pathNotFound = $function;
     }
 
-    public static function methodNotAllowed($function) {
+    public static function methodNotAllowed(callable $function) {
         self::$methodNotAllowed = $function;
     }
 
-    public static function run($basepath = '', $case_matters = false, $trailing_slash_matters = false, $multimatch = false) {
+    public static function run($base_path = '', $case_matters = false, $trailing_slash_matters = false, $multi_match = false) {
 
-        // The basepath never needs a trailing slash
+        // The base path never needs a trailing slash
         // Because the trailing slash will be added using the route expressions
-        $basepath = rtrim($basepath, '/');
+        $base_path = rtrim($base_path, '/');
 
         // Parse current URL
         $parsed_url = parse_url($_SERVER['REQUEST_URI']);
@@ -53,7 +53,7 @@ class Route {
                 $path = $parsed_url['path'];
             } else {
                 // If the path is not equal to the base path (including a trailing slash)
-                if ($basepath . '/' != $parsed_url['path']) {
+                if ($base_path . '/' != $parsed_url['path']) {
                     // Cut the trailing slash away because it does not matters
                     $path = rtrim($parsed_url['path'], '/');
                 } else {
@@ -75,9 +75,9 @@ class Route {
 
             // If the method matches check the path
 
-            // Add basepath to matching string
-            if ($basepath != '' && $basepath != '/') {
-                $route['expression'] = '(' . $basepath . ')' . $route['expression'];
+            // Add base path to matching string
+            if ($base_path != '' && $base_path != '/') {
+                $route['expression'] = '(' . $base_path . ')' . $route['expression'];
             }
 
             // Add 'find string start' automatically
@@ -96,8 +96,8 @@ class Route {
                     if (strtolower($method) == strtolower($allowedMethod)) {
                         array_shift($matches); // Always remove first element. This contains the whole string
 
-                        if ($basepath != '' && $basepath != '/') {
-                            array_shift($matches); // Remove basepath
+                        if ($base_path != '' && $base_path != '/') {
+                            array_shift($matches); // Remove base path
                         }
 
                         if ($return_value = call_user_func_array($route['function'], $matches)) {
@@ -113,7 +113,7 @@ class Route {
             }
 
             // Break the loop if the first found route is a match
-            if ($route_match_found && !$multimatch) {
+            if ($route_match_found && !$multi_match) {
                 break;
             }
 
