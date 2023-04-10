@@ -2,10 +2,12 @@
 
 namespace Steampixel;
 
+use Exception;
+
 class Component {
 
     // Define an array of folders with components inside
-    public static $folders = [];
+    public static array $folders = [];
 
     // This is the name of the component instance
     public $name = false;
@@ -14,20 +16,20 @@ class Component {
     public $folder = false;
 
     // Define an array containing variables for rendering the component
-    public $props = [];
+    public array $props = [];
 
     // Add a new folder to the component class
-    public static function addFolder($folder) {
-        array_push(self::$folders, $folder);
+    public static function addFolder(string $folder) {
+        self::$folders[] = $folder;
     }
 
     // This is a static factory method
-    public static function create($component_name, $folder = false) {
+    public static function create(string $component_name, $folder = false): Component {
         return new self($component_name, $folder);
     }
 
     // This is the constructor for the instance
-    public function __construct($component_source, $folder) {
+    public function __construct(string $component_source, $folder) {
 
         $this->name = $component_source;
 
@@ -36,12 +38,16 @@ class Component {
     }
 
     // Auto convert instances to string
+
+    /**
+     * @throws Exception
+     */
     public function __toString() {
         return $this->render();
     }
 
     // Add new data to the component instance
-    public function assign($key, $value = null) {
+    public function assign($key, $value = null): Component {
         if (is_array($key)) {
             foreach ($key as $_key => $_value) {
                 $this->props[$_key] = $_value;
@@ -53,6 +59,10 @@ class Component {
     }
 
     // Return a prop to the component instance
+
+    /**
+     * @throws Exception
+     */
     public function prop($prop_name, $options = []) {
 
         $return_prop = Null;
@@ -74,7 +84,7 @@ class Component {
         // Check if the prop is required
         if (isset($options['required']) && $options['required']) {
             if ($return_prop === NUll) {
-                throw new \Exception('The prop "' . $prop_name . '" is required for rendering the component "' . $this->name . '"!');
+                throw new Exception('The prop "' . $prop_name . '" is required for rendering the component "' . $this->name . '"!');
             }
         }
 
@@ -93,11 +103,11 @@ class Component {
                         }
                     }
                     if (!$type_validated) {
-                        throw new \Exception('The prop "' . $prop_name . '" must be of one of the following types for the component "' . $this->name . '": "' . implode(',', $options['type']) . '". The current type is "' . $prop_type . '"');
+                        throw new Exception('The prop "' . $prop_name . '" must be of one of the following types for the component "' . $this->name . '": "' . implode(',', $options['type']) . '". The current type is "' . $prop_type . '"');
                     }
                 } else {
                     if ($options['type'] != $prop_type) {
-                        throw new \Exception('The prop "' . $prop_name . '" must be of type "' . $options['type'] . '" for the component "' . $this->name . '". The current type is "' . $prop_type . '"');
+                        throw new Exception('The prop "' . $prop_name . '" must be of type "' . $options['type'] . '" for the component "' . $this->name . '". The current type is "' . $prop_type . '"');
                     }
                 }
 
@@ -109,6 +119,10 @@ class Component {
     }
 
     // Render the component
+
+    /**
+     * @throws Exception
+     */
     public function render() {
 
         $result = '';
@@ -116,7 +130,7 @@ class Component {
         // Start the output buffering
         ob_start();
 
-        // Catch the tempalte return
+        // Catch the template return
         $template_return = false;
 
         $loaded = false;
@@ -140,22 +154,24 @@ class Component {
         }
 
         if (!$loaded) {
-            throw new \Exception('Unable to render component "' . $this->name . '".');
+            throw new Exception('Unable to render component "' . $this->name . '".');
         }
 
         // Get the results
-        $result = ob_get_clean();
-
-        return $result;
+        return ob_get_clean();
 
     }
 
     // Print out component HTML
+
+    /**
+     * @throws Exception
+     */
     public function print() {
         echo $this->render();
     }
 
-    public function loadFromFolder($folder, $name) {
+    public function loadFromFolder(string $folder, string $name): bool {
         if (file_exists($folder . '/' . $name . '.php')) {
             include($folder . '/' . $name . '.php');
             return true;
