@@ -4,10 +4,10 @@ namespace Steampixel;
 
 class Portal {
 
-    private static $contents = [];
+    private static array $contents = [];
 
     // Send something to a portal
-    public static function send($portal_name, $contents, $prepend = false, $once = false) {
+    public static function send(string $portal_name, $contents, bool $prepend = false, bool $once = false): void {
 
         // Create a content array for this portal
         if (!array_key_exists($portal_name, self::$contents)) {
@@ -24,14 +24,14 @@ class Portal {
             if ($once) {
                 if (!in_array($content, self::$contents[$portal_name])) {
                     if (!$prepend) {
-                        array_push(self::$contents[$portal_name], $content);
+                        self::$contents[$portal_name][] = $content;
                     } else {
                         array_unshift(self::$contents[$portal_name], $content);
                     }
                 }
             } else {
                 if (!$prepend) {
-                    array_push(self::$contents[$portal_name], $content);
+                    self::$contents[$portal_name][] = $content;
                 } else {
                     array_unshift(self::$contents[$portal_name], $content);
                 }
@@ -41,7 +41,7 @@ class Portal {
     }
 
     // Open a portal to this point
-    public static function open($portal_name) {
+    public static function open(string $portal_name) {
         // Set the portal name. So it will be replaced later even its empty
         if (!array_key_exists($portal_name, self::$contents)) {
             self::$contents[$portal_name] = [];
@@ -51,16 +51,13 @@ class Portal {
     }
 
     // Compose and Render the portal data
-    public static function render($string) {
+    public static function render(string $string) {
 
         // Replace the portals inside each other portal
         foreach (self::$contents as $portal_name_replace => $content_replace) {
             foreach (self::$contents as $portal_name => $contents) {
 
-                $content_str = '';
-                foreach ($contents as $content) {
-                    $content_str .= $content;
-                }
+                $content_str = implode('', $contents);
 
                 self::$contents[$portal_name_replace] = str_replace('<!-- Portal:' . $portal_name . ' -->', $content_str, $content_replace);
             }
@@ -68,10 +65,7 @@ class Portal {
 
         // Replace the portals inside the string
         foreach (self::$contents as $portal_name => $contents) {
-            $content_str = '';
-            foreach ($contents as $content) {
-                $content_str .= $content;
-            }
+            $content_str = implode('', $contents);
 
             $string = str_replace('<!-- Portal:' . $portal_name . ' -->', $content_str, $string);
         }
@@ -83,7 +77,7 @@ class Portal {
         return $string;
     }
 
-    public static function print($string) {
+    public static function print(string $string) {
         echo self::render($string);
     }
 
@@ -93,7 +87,7 @@ class Portal {
     }
 
     // Send buffer
-    public static function sendBuffer($portal_name, $prepend = false, $once = false) {
+    public static function sendBuffer(string $portal_name, bool $prepend = false, bool $once = false) {
         self::send($portal_name, ob_get_clean(), $prepend, $once);
     }
 

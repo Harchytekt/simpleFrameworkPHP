@@ -4,7 +4,7 @@ namespace Steampixel;
 
 class Route {
 
-    private static array $routes = array();
+    private static array $routes = [];
     private static $pathNotFound = null;
     private static $methodNotAllowed = null;
 
