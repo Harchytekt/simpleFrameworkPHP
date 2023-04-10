@@ -14,11 +14,11 @@ use Steampixel\Route;
 use Steampixel\Component;
 use Steampixel\Portal;
 
-// Define a global basepath
-define('BASEPATH', '/');
+// Define a global base path
+const BASE_PATH = '/';
 
 // Define our theme
-define('THEME', 'default');
+const THEME = 'default';
 
 // Add the folders where the components live
 Component::addFolder('themes/' . THEME);
@@ -67,7 +67,7 @@ Route::methodNotAllowed(function ($path, $method) {
 });
 
 // Run the router
-Route::run(BASEPATH);
+Route::run(BASE_PATH);
 
 // Compose, print, render and copy together all the portal magic
 Portal::compose();
