@@ -1,57 +1,41 @@
-
-<div class="container">
-
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-      </a>
-
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a href="/" class="navbar-item">
-          Home
-        </a>
-
-        <a href="/contact" class="navbar-item">
-          Contact
-        </a>
-
-        <a href="/about" class="navbar-item">
-          About
-        </a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More
-          </a>
-
-          <div class="navbar-dropdown">
-            <a href="/imprint" class="navbar-item">
-              Imprint
-            </a>
-            <a href="/privacy" class="navbar-item">
-              Privacy
-            </a>
-            <hr class="navbar-divider">
-            <a href="/user/42/edit" class="navbar-item">
-              Edit user 42
-            </a>
-            <a href="/user/161/edit" class="navbar-item">
-              Edit user 161
-            </a>
-          </div>
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">SimpleFrameworkPHP</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SimpleFrameworkPHP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            More
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/imprint">Imprint</a></li>
+                            <li><a class="dropdown-item" href="/privacy">Privacy</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/user/42/edit">Edit user 42</a></li>
+                            <li><a class="dropdown-item" href="/user/161/edit">Edit user 161</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-
     </div>
-  </nav>
-
-</div>
+</nav>

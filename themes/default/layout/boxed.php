@@ -25,7 +25,7 @@
   ]);
 
 ?><!DOCTYPE html>
-<html lang="<?=$lang ?>">
+<html lang="<?=$lang ?>" data-bs-theme="dark" class="h-100">
 
   <head>
 
@@ -37,19 +37,19 @@
 
   </head>
 
-  <body>
+  <body  class="d-flex flex-column h-100">
 
     <?=Component::create('partials/navigation') ?>
 
     <?=Component::create('content/hero')->assign(['title' => $title, 'subtitle' => $subtitle, 'size' => $hero_size]) ?>
 
-    <section class="section">
+    <main class="flex-shrink-0">
       <div class="container">
 
         <?=Component::create('partials/content') ?>
 
       </div>
-    </section>
+    </main>
 
     <?=Component::create('partials/footer') ?>
 
