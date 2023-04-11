@@ -30,11 +30,9 @@ class Component {
 
     // This is the constructor for the instance
     public function __construct(string $component_source, $folder) {
-
         $this->name = $component_source;
 
         $this->folder = $folder;
-
     }
 
     // Auto convert instances to string
@@ -64,21 +62,16 @@ class Component {
      * @throws Exception
      */
     public function prop($prop_name, $options = []) {
-
         $return_prop = Null;
 
         // Check if the prop exists in the props array
         if (isset($this->props[$prop_name])) {
-
             $return_prop = $this->props[$prop_name];
-
         } else {
-
             // Check if there is a default value
             if (isset($options['default'])) {
                 $return_prop = $options['default'];
             }
-
         }
 
         // Check if the prop is required
@@ -91,7 +84,6 @@ class Component {
         // Check the type of the prop
         if (isset($return_prop)) {
             if (isset($options['type'])) {
-
                 $prop_type = gettype($return_prop);
 
                 if (is_array($options['type'])) {
@@ -110,12 +102,10 @@ class Component {
                         throw new Exception('The prop "' . $prop_name . '" must be of type "' . $options['type'] . '" for the component "' . $this->name . '". The current type is "' . $prop_type . '"');
                     }
                 }
-
             }
         }
 
         return $return_prop;
-
     }
 
     // Render the component
@@ -124,23 +114,14 @@ class Component {
      * @throws Exception
      */
     public function render() {
-
-        $result = '';
-
         // Start the output buffering
         ob_start();
 
-        // Catch the template return
-        $template_return = false;
-
         $loaded = false;
         if ($this->folder) {
-
             // Load this component from a specific folder
             $loaded = $this->loadFromFolder($this->folder, $this->name);
-
         } else {
-
             // Try to find this component in all folders
             foreach (self::$folders as $key => $folder) {
                 //echo 'checking file '.$folder.'/'.$this->name.'.php<br>';
@@ -150,7 +131,6 @@ class Component {
                     break;
                 }
             }
-
         }
 
         if (!$loaded) {
@@ -159,7 +139,6 @@ class Component {
 
         // Get the results
         return ob_get_clean();
-
     }
 
     // Print out component HTML

@@ -36,7 +36,6 @@ class Route {
     }
 
     public static function run($base_path = '', $case_matters = false, $trailing_slash_matters = false, $multi_match = false) {
-
         // The base path never needs a trailing slash
         // Because the trailing slash will be added using the route expressions
         $base_path = rtrim($base_path, '/');
@@ -72,9 +71,7 @@ class Route {
         $route_match_found = false;
 
         foreach (self::$routes as $route) {
-
             // If the method matches check the path
-
             // Add base path to matching string
             if ($base_path != '' && $base_path != '/') {
                 $route['expression'] = '(' . $base_path . ')' . $route['expression'];
@@ -116,7 +113,6 @@ class Route {
             if ($route_match_found && !$multi_match) {
                 break;
             }
-
         }
 
         // No matching route was found
@@ -135,7 +131,6 @@ class Route {
                     }
                 }
             }
-
         }
     }
 

@@ -8,7 +8,6 @@ class Portal {
 
     // Send something to a portal
     public static function send(string $portal_name, $contents, bool $prepend = false, bool $once = false): void {
-
         // Create a content array for this portal
         if (!array_key_exists($portal_name, self::$contents)) {
             self::$contents[$portal_name] = [];
@@ -37,7 +36,6 @@ class Portal {
                 }
             }
         }
-
     }
 
     // Open a portal to this point
@@ -52,11 +50,9 @@ class Portal {
 
     // Compose and Render the portal data
     public static function render(string $string) {
-
         // Replace the portals inside each other portal
         foreach (self::$contents as $portal_name_replace => $content_replace) {
             foreach (self::$contents as $portal_name => $contents) {
-
                 $content_str = implode('', $contents);
 
                 self::$contents[$portal_name_replace] = str_replace('<!-- Portal:' . $portal_name . ' -->', $content_str, $content_replace);
@@ -100,5 +96,4 @@ class Portal {
     public static function compose() {
         self::print(ob_get_clean());
     }
-
 }
