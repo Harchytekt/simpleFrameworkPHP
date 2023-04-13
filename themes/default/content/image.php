@@ -14,13 +14,13 @@ $title = $this->prop('title', [
 ?>
 
 <div class="container">
+    <div class="text-center">
+        <figure class="figure">
+            <img src="<?= $src ?>" class="figure-img img-fluid rounded"/>
 
-    <figure class="figure">
-    <img src="<?= $src ?>" class="figure-img img-fluid rounded mx-auto d-block"/>
-
-    <?PHP if ($title) { ?>
-        <figcaption class="figure-caption"><?= $title ?></figcaption>
-    <?PHP } ?>
-    </figure>
-
+            <?PHP if ($title) { ?>
+                <figcaption class="figure-caption"><?= $title ?></figcaption>
+            <?PHP } ?>
+        </figure>
+    </div>
 </div>
