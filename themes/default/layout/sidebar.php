@@ -1,73 +1,67 @@
 <?PHP
 
-  namespace Steampixel;
+namespace Steampixel;
 
-  // Get the component props
-  $lang = $this->prop('lang', [
+// Get the component props
+$lang = $this->prop('lang', [
     'type' => 'string',
     'required' => true
-  ]);
+]);
 
-  $title = $this->prop('title', [
+$title = $this->prop('title', [
     'type' => 'string',
     'required' => true
-  ]);
+]);
 
-  $subtitle = $this->prop('subtitle', [
+$subtitle = $this->prop('subtitle', [
     'type' => 'string',
     'required' => false
-  ]);
+]);
 
-  $hero_size = $this->prop('hero_size',[
+$hero_size = $this->prop('hero_size', [
     'type' => 'string',
     'required' => false,
     'default' => 'small'
-  ]);
+]);
 
 ?><!DOCTYPE html>
-<html lang="<?=$lang ?>">
+<html lang="<?= $lang ?>" data-bs-theme="dark" class="h-100">
 
-  <head>
+<head>
 
-    <?=Component::create('partials/title')->assign(['title'=>$title])->render() ?>
+    <?= Component::create('partials/title')->assign(['title' => $title])->render() ?>
 
-    <?=Component::create('partials/meta')->render() ?>
+    <?= Component::create('partials/meta')->render() ?>
 
-    <?=Component::create('partials/style')->render() ?>
+    <?= Component::create('partials/style')->render() ?>
 
-  </head>
+</head>
 
-  <body>
+<body class="d-flex flex-column h-100">
 
-    <?=Component::create('partials/navigation') ?>
+<?= Component::create('partials/navigation') ?>
 
-    <?=Component::create('content/hero')->assign(['title' => $title, 'size' => $hero_size]) ?>
+<?= Component::create('content/hero')->assign(['title' => $title, 'size' => $hero_size]) ?>
 
-    <section class="section">
-      <div class="container">
-
-        <div class="columns">
-
-          <div class="column is-one-fifth">
-
-            <?=Component::create('partials/sidebar')->assign(['title' => $subtitle]) ?>
-
-          </div>
-
-          <div class="column">
-
-            <?=Component::create('partials/content') ?>
-
-          </div>
-
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col-3">
+                    <?= Component::create('partials/sidebar')->assign(['title' => $subtitle]) ?>
+                </div>
+                <div class="col-9">
+                    <?= Component::create('partials/content') ?>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+</main>
 
-    <?=Component::create('partials/footer') ?>
+<?= Component::create('partials/footer') ?>
 
-    <?=Component::create('partials/javascript') ?>
+<?= Component::create('partials/javascript') ?>
 
-  </body>
+</body>
 
 </html>
