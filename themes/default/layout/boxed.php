@@ -1,60 +1,61 @@
 <?PHP
 
-  namespace Steampixel;
+namespace Steampixel;
 
-  // Get the component props
-  $lang = $this->prop('lang', [
+// Get the component props
+$lang = $this->prop('lang', [
     'type' => 'string',
     'required' => true
-  ]);
+]);
 
-  $title = $this->prop('title', [
+$title = $this->prop('title', [
     'type' => 'string',
     'required' => true
-  ]);
+]);
 
-  $subtitle = $this->prop('subtitle', [
+$subtitle = $this->prop('subtitle', [
     'type' => 'string',
     'required' => false
-  ]);
+]);
 
-  $hero_size = $this->prop('hero_size',[
+$hero_size = $this->prop('hero_size', [
     'type' => 'string',
     'required' => false,
     'default' => 'small'
-  ]);
+]);
 
-?><!DOCTYPE html>
-<html lang="<?=$lang ?>" data-bs-theme="dark" class="h-100">
+?>
+<!DOCTYPE html>
+<html lang="<?= $lang ?>" data-bs-theme="dark" class="h-100">
 
-  <head>
+<head>
 
-    <?=Component::create('partials/title')->assign(['title'=>$title])->render() ?>
+    <?= Component::create('partials/title')->assign(['title' => $title])->render() ?>
 
-    <?=Component::create('partials/meta')->render() ?>
+    <?= Component::create('partials/meta')->render() ?>
 
-    <?=Component::create('partials/style')->render() ?>
+    <?= Component::create('partials/style')->render() ?>
 
-  </head>
+</head>
 
-  <body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100">
 
-    <?=Component::create('partials/navigation') ?>
+<?= Component::create('partials/navigation') ?>
 
-    <?=Component::create('content/hero')->assign(['title' => $title, 'subtitle' => $subtitle, 'size' => $hero_size]) ?>
+<?= Component::create('content/hero')->assign(['title' => $title, 'subtitle' => $subtitle, 'size' => $hero_size]) ?>
 
-    <main class="flex-shrink-0">
-      <div class="container">
+<main class="flex-shrink-0">
+    <div class="container">
 
-        <?=Component::create('partials/content') ?>
+        <?= Component::create('partials/content') ?>
 
-      </div>
-    </main>
+    </div>
+</main>
 
-    <?=Component::create('partials/footer') ?>
+<?= Component::create('partials/footer') ?>
 
-    <?=Component::create('partials/javascript') ?>
+<?= Component::create('partials/javascript') ?>
 
-  </body>
+</body>
 
 </html>

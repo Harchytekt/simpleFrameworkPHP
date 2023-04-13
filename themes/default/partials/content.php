@@ -1,7 +1,5 @@
 <?PHP
 
-  namespace Steampixel;
+namespace Steampixel;
 
-  Portal::open('contents-main');
-
-?>
+Portal::open('contents-main');

@@ -24,7 +24,8 @@ $hero_size = $this->prop('hero_size', [
     'default' => 'small'
 ]);
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="<?= $lang ?>" data-bs-theme="dark" class="h-100">
 
 <head>
