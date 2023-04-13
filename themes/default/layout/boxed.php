@@ -26,7 +26,7 @@ $hero_size = $this->prop('hero_size', [
 
 ?>
 <!DOCTYPE html>
-<html lang="<?= $lang ?>" data-bs-theme="dark" class="h-100">
+<html lang="<?= $lang ?>" class="h-100">
 
 <head>
 
