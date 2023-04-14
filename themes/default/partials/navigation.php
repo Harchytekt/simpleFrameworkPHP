@@ -32,6 +32,7 @@
                             </li>
                             <li><a class="dropdown-item" href="/user/42/edit">Edit user 42</a></li>
                             <li><a class="dropdown-item" href="/user/161/edit">Edit user 161</a></li>
+                            <li><a class="dropdown-item" href="/dpk">DPK</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

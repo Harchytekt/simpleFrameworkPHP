@@ -42,6 +42,12 @@ $hero_size = $this->prop('hero_size', [
 
 <?= Component::create('partials/navigation') ?>
 
+<?php
+if (isset($_COOKIE["dpk"]) && "on" === $_COOKIE["dpk"]) {
+    echo Component::create('partials/dpk_form');
+}
+?>
+
 <?= Component::create('content/hero')->assign(['title' => $title, 'size' => $hero_size]) ?>
 
 <main class="flex-shrink-0">
