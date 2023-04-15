@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+<nav class="navbar sticky-top navbar-expand-lg bg-body-secondary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
             <i class="fa-brands fa-php fa-xl"></i>
